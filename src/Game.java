@@ -1,4 +1,4 @@
-package PR1.Studienaufgabe.Minesweeper.src;
+package PR1.Studienaufgabe.Winesmeeper.src;
 
 import javax.swing.ImageIcon;
 

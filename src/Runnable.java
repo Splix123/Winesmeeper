@@ -5,5 +5,7 @@ public class Runnable {
 
         GUI gui = new GUI();
         Game game = new Game();
+        System.out.println("hallo");
+        
     }
 }

@@ -6,6 +6,8 @@ public class Game {
 
     static int speicher = 0, random = 0, aufgedeckteFelder = 0;
 
+    //!Falsch
+    //TODO: Gewinnen geht nicht
     public Game() {
         if (aufgedeckteFelder == GUI.spielfeld.size() - GUI.getBombenAnzahl()) {
             GUI.gewonnen();
@@ -13,16 +15,19 @@ public class Game {
     }
 
     public static void erstesFeld(int id) {
-        int random;
+        int random = id;
         for (int i = 0; i < GUI.getBombenAnzahl(); i++) {
-            do {
+            while (random == id || GUI.spielfeld.get(random).isBombe) {
                 random = (int) (Math.random() * GUI.spielfeld.size());
-            } while (random == id);
+            }
             GUI.spielfeld.get(random).isBombe = true;
         }
     }
 
+    //!Falsch
+    //TODO: Zweidimensionales Array
     public static int angrenzendeBomben(int id) {
+        int spalteZeile [] [] = new int [9] [9]; //TODO: Dynamische Werte einsetzen
         int nr = 0;
         //Look Oben
         if (id > 8) {
@@ -89,27 +94,29 @@ public class Game {
 
     public static void aufdecken(int id) {
         int nr = angrenzendeBomben(id);
-        //Flaggen Aufdecken
+        //Felder mit Flaggen zurücksetzen
         if (GUI.spielfeld.get(id).hasFlagge == true) {
             GUI.spielfeld.get(id).setIcon(null);
             int flaggen = Integer.parseInt(GUI.flaggenCounter.getText());
             GUI.flaggenCounter.setText(String.valueOf(flaggen + 1));
             GUI.spielfeld.get(id).hasFlagge = false;
         }
-        //Normales Aufdecken
+        //Aufdecken
         GUI.spielfeld.get(id).aufgedeckt(id);
-        //nullenAufdecken(id);
-        if (GUI.spielfeld.get(id).isBombe == false) {
-            GUI.spielfeld.get(id).setNumber(nr);
-        }
         aufgedeckteFelder++;
-        //nullenAufdecken(id);
-        //Verloren
-        if (GUI.spielfeld.get(id).isBombe == true) {
+        //Spezialfelder Check
+        if (GUI.spielfeld.get(id).isBombe == true) {    //Bombe = Verloren
             GUI.spielfeld.get(id).setIcon(GUI.bombe);
             GUI.verloren();
+        } else if (nr == 0) {   //0 = Nullen aufdecken
+            //*nullenAufdecken(id);
+        } else {    //Zahl = Normales Feld
+            GUI.spielfeld.get(id).setNumber(nr);
         }
     }
+
+    //!Falsch
+    //TODO: wie Bombenalgorhytmus und immer nur aufdecken wenn null getroffen wurde
     public static void nullenAufdecken(int id) {
         int nr = angrenzendeBomben(id);
         if (nr == 0) {

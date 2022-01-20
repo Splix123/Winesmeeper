@@ -13,7 +13,7 @@ import javax.swing.JButton;
 public class Button extends JButton {
     Linksklick linksklick = new Linksklick();
     Rechtsklick rechtsklick = new Rechtsklick();
-    int id;
+    int id, nr;
     boolean hasFlagge, isBombe;
     static Color buttonFarbe [] = {new Color(209, 175, 145), new Color(225, 186, 151), new Color(153, 202, 78), new Color(161, 209, 84), new Color(66, 106, 45)};
 
@@ -36,7 +36,7 @@ public class Button extends JButton {
     public class Linksklick implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent links) {
-            if (Game.aufgedeckteFelder == 1) {
+            if (Game.aufgedeckteFelder == 0) {
                 Game.erstesFeld(id);
                 Game.aufdecken(id);
             } else {

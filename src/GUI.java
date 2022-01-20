@@ -18,8 +18,8 @@ public class GUI extends JFrame {
     JFrame frame;
     static JLabel schwierigkeit, flaggenCounter, flaggenImage;
     JLabel leeresFeld[] = new JLabel[6];
-    static ImageIcon flagge = new ImageIcon("PR1/Studienaufgabe/Minesweeper/res/flagIcon.png"), 
-    bombe = new ImageIcon("PR1/Studienaufgabe/Minesweeper/res/bombIcon.png");
+    static ImageIcon flagge = new ImageIcon("PR1/Studienaufgabe/Winesmeeper/res/flagIcon.png"), 
+    bombe = new ImageIcon("PR1/Studienaufgabe/Winesmeeper/res/bombIcon.png");
     Font font = new Font("Arial", Font.PLAIN, 35);
     static ArrayList<Button> spielfeld = new ArrayList<>();
 
@@ -113,6 +113,7 @@ public class GUI extends JFrame {
         return schwierigkeit;
     }
 
+    //JOtionPane wenn verloren
     public static void verloren() {
         Game.allesAufdecken(bombe);
         JOptionPane.showConfirmDialog(null,
@@ -122,6 +123,7 @@ public class GUI extends JFrame {
         System.exit(0);
     }
 
+    //JOtionPane wenn gewonnen
     public static void gewonnen() {
         Game.allesAufdecken(bombe);
         JOptionPane.showConfirmDialog(null,

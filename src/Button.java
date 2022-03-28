@@ -1,4 +1,4 @@
-package PR1.Studienaufgabe.Winesmeeper.src;
+package PR1.Studienaufgabe.PR1_Moritz_Ruehm.Winesmeeper.src;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -11,18 +11,20 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 
 public class Button extends JButton {
-    Linksklick linksklick = new Linksklick();
-    Rechtsklick rechtsklick = new Rechtsklick();
-    int id, nr;
-    boolean hasFlagge, isBombe;
-    static Color buttonFarbe [] = {new Color(209, 175, 145), new Color(225, 186, 151), new Color(153, 202, 78), new Color(161, 209, 84), new Color(66, 106, 45)};
+    private Linksklick linksklick = new Linksklick();
+    private Rechtsklick rechtsklick = new Rechtsklick();
+    private int id;
+    private boolean hasFlagge, isBombe;
+    static Color buttonFarbe[] = { new Color(209, 175, 145), new Color(225, 186, 151),  //0/1 == Braun
+        new Color(153, 202, 78), new Color(161, 209, 84), new Color(66, 106, 45) };     //2/3 == Grün, 4 == Dunkelgrün
 
-    Button (int id, Container container, Font font) {
+    Button(int id, Container container, Font font) {
         this.id = id;
+        //Schachbrettmuster
         if (id % 2 == 0) {
-            this.setBackground(buttonFarbe [2]);
+            this.setBackground(buttonFarbe[2]);
         } else {
-            this.setBackground(buttonFarbe [3]);
+            this.setBackground(buttonFarbe[3]);
         }
         this.setBorderPainted(false);
         this.setOpaque(true);
@@ -32,11 +34,11 @@ public class Button extends JButton {
         container.add(this);
     }
 
-    //Linksklick == aufdecken
+    // Linksklick == aufdecken
     public class Linksklick implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent links) {
-            if (Game.aufgedeckteFelder == 0) {
+            if (Game.getAufgedeckteFelder() == 0) {
                 Game.erstesFeld(id);
                 Game.aufdecken(id);
             } else {
@@ -45,28 +47,34 @@ public class Button extends JButton {
         }
     }
 
-    //Rechtsklick == Flagge
+    // Rechtsklick == Flagge
     public class Rechtsklick extends MouseAdapter {
-        public void mouseClicked( MouseEvent rechts) {
+        public void mouseClicked(MouseEvent rechts) {
             if (rechts.getButton() == MouseEvent.BUTTON3) {
                 Game.setFlagge(GUI.flagge, id);
             }
         }
     }
 
-    public void setBombe() {
-        isBombe = true;
+    public void setBombe(boolean is) {
+        if (is) {
+            isBombe = true;
+        } else {
+            isBombe = false;
+        }
     }
 
     public void aufgedeckt(int id) {
+        //Schachbrettmuster
         if (id % 2 == 0) {
-            this.setBackground(buttonFarbe [0]);
+            this.setBackground(buttonFarbe[0]);
         } else {
-            this.setBackground(buttonFarbe [1]);
+            this.setBackground(buttonFarbe[1]);
         }
     }
 
     public void setNumber(int nr) {
+        //Entschiedung der Farbe für jede Nummer
         switch (nr) {
             case 1:
                 this.setForeground(Color.BLUE);
@@ -90,5 +98,17 @@ public class Button extends JButton {
                 break;
         }
         this.setText(String.valueOf(nr));
+    }
+
+    public boolean getIsBombe() {
+        return isBombe;
+    }
+
+    public boolean getHasFlagge() {
+        return hasFlagge;
+    }
+
+    public void setHasFlagge(boolean has) {
+        hasFlagge = has;
     }
 }

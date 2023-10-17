@@ -1,11 +1,2 @@
-## General
-
 Minesweeper programmiert von Moritz Rühm
-## Roadmap
-
-- Nullen aufdecken hinzufügen
-- Feldgröße auf Schwierigkeit anpassen
-- ~~"Nochmal spielen?" hinzufügen~~
-- Runnable erstellen
-- Sounds Hinzufügen
-- Code verbessern
+Als Abgabe für den Kurs PR1 an der Hochschule Mannheim
